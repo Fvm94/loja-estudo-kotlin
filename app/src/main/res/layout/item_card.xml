@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp">
+    android:elevation="2dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -13,22 +16,53 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_card_iv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:srcCompat="@drawable/_mg_9070_edit" />
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_8942_edit" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_card_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Anel Coracao"
-            android:textAlignment="center" />
+            android:hint="Nome Item"
+            android:lines="1"
+            android:padding="2dp"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_card_tv_price"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="19.90" />
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/item_card_tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="19.90"
+                android:textAlignment="center"
+                android:textColor="#F28D17"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/item_card_bt"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="4dp"
+                app:icon="@drawable/ic_bag_24dp_black"
+                app:iconTint="#3AA757"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

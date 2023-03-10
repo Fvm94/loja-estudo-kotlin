@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.franciscovm.loja.data.ItemType
-import com.franciscovm.loja.data.Joia
+import com.franciscovm.loja.R
+import com.franciscovm.loja.data.FilterIten
+import com.franciscovm.loja.data.toChip
 import com.franciscovm.loja.databinding.FragmentHomeBinding
 import com.franciscovm.loja.ui.adapter.ItemAdapter
+import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private var spanCount: Int = 3
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,20 +34,25 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val anel = Joia("Anel de Coração",15.60,ItemType.anel,"Lindo Anel com detalhe de Coração")
-        val brinco = Joia("Argolas Douradas",10.00, ItemType.brinco,"")
-        val brinco2 = Joia("Brinco diamante",15.45, ItemType.brinco,"")
-        val colar = Joia("Colar Cobra",19.90,ItemType.colar,"")
-
-
-        val joias = listOf(anel,brinco,brinco2,colar
-        )
-
-
         val home_rv = binding.homeRv
         home_rv.hasFixedSize()
-        home_rv.layoutManager = GridLayoutManager(this.context,2)
-        home_rv.adapter = ItemAdapter(joias)
+
+        val joias = homeViewModel.joias.value
+
+        home_rv.layoutManager = GridLayoutManager(this.context,spanCount)
+        home_rv.adapter = joias?.let { ItemAdapter(it) }
+
+        val filters = arrayOf(
+            FilterIten(1,"Aneis"),
+            FilterIten(2, "Colares"),
+            FilterIten(3,"Brincos"),
+            FilterIten(4, "Argolas")
+            )
+
+        filters.forEach {
+            binding.homeChipgroupFilter.addView(it.toChip(requireContext()))
+        }
+
 
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
